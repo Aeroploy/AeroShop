@@ -1,18 +1,24 @@
 from flask import Flask, render_template, request, session, redirect, url_for
 import sqlite3
+import os
 
 app = Flask(__name__)
 app.secret_key = "mysecretkey"
+
+# Create database automatically if it doesn't exist
+def create_database():
+    if not os.path.exists("store.db"):
+        import database
+
+create_database()
 
 
 # ==========================
 # Database Connection
 # ==========================
 def get_connection():
-
     conn = sqlite3.connect("store.db")
     conn.row_factory = sqlite3.Row
-
     return conn
 
 
@@ -25,18 +31,14 @@ def get_products(search=""):
     cursor = conn.cursor()
 
     if search:
-
         cursor.execute(
             "SELECT * FROM products WHERE name LIKE ?",
             ("%" + search + "%",)
         )
-
     else:
-
         cursor.execute("SELECT * FROM products")
 
     products = cursor.fetchall()
-
     conn.close()
 
     return products
@@ -54,11 +56,9 @@ def home():
     products = get_products(search)
 
     if category != "All":
-
         products = [
-            product
-            for product in products
-            if product["category"] == category
+            p for p in products
+            if p["category"] == category
         ]
 
     cart = session.get("cart", {})
@@ -73,7 +73,6 @@ def home():
         pid = str(product["id"])
 
         if pid in cart:
-
             total_price += product["price"] * cart[pid]
 
     return render_template(
@@ -104,7 +103,7 @@ def add_to_cart(product_id):
 
     session["cart"] = cart
 
-    return redirect(url_for("home"))
+    return redirect(request.referrer or url_for("home"))
 
 
 # ==========================
@@ -140,7 +139,7 @@ def decrease(product_id):
         cart[pid] -= 1
 
         if cart[pid] <= 0:
-            cart.pop(pid)
+            del cart[pid]
 
     session["cart"] = cart
 
@@ -158,7 +157,7 @@ def remove_item(product_id):
     pid = str(product_id)
 
     if pid in cart:
-        cart.pop(pid)
+        del cart[pid]
 
     session["cart"] = cart
 
@@ -174,6 +173,78 @@ def clear_cart():
     session["cart"] = {}
 
     return redirect(url_for("home"))
+
+
+# ==========================
+# Product Details
+# ==========================
+@app.route("/product/<int:product_id>")
+def product_details(product_id):
+
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    cursor.execute(
+        "SELECT * FROM products WHERE id=?",
+        (product_id,)
+    )
+
+    product = cursor.fetchone()
+
+    conn.close()
+
+    if product is None:
+        return "Product Not Found!"
+
+    return render_template(
+        "product.html",
+        product=product,
+        user=session.get("user"),
+        cart_count=sum(session.get("cart", {}).values())
+    )
+
+
+# ==========================
+# Wishlist Page
+# ==========================
+@app.route("/wishlist")
+def wishlist():
+
+    if "user" not in session:
+        return redirect(url_for("login"))
+
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    cursor.execute(
+        "SELECT email FROM users WHERE name=?",
+        (session["user"],)
+    )
+
+    user = cursor.fetchone()
+
+    if not user:
+        conn.close()
+        return redirect(url_for("home"))
+
+    cursor.execute("""
+        SELECT products.*
+        FROM wishlist
+        JOIN products
+        ON wishlist.product_id = products.id
+        WHERE wishlist.user_email=?
+    """, (user["email"],))
+
+    products = cursor.fetchall()
+
+    conn.close()
+
+    return render_template(
+        "wishlist.html",
+        products=products,
+        user=session.get("user"),
+        cart_count=sum(session.get("cart", {}).values())
+    )
 
 
 # ==========================
@@ -202,9 +273,7 @@ def add_wishlist(product_id):
             (user["email"], product_id)
         )
 
-        exists = cursor.fetchone()
-
-        if not exists:
+        if cursor.fetchone() is None:
 
             cursor.execute(
                 "INSERT INTO wishlist(user_email, product_id) VALUES(?, ?)",
@@ -251,78 +320,6 @@ def remove_wishlist(product_id):
     return redirect(url_for("wishlist"))
 
     # ==========================
-# Wishlist Page
-# ==========================
-@app.route("/wishlist")
-def wishlist():
-
-    if "user" not in session:
-        return redirect(url_for("login"))
-
-    conn = get_connection()
-    cursor = conn.cursor()
-
-    cursor.execute(
-        "SELECT email FROM users WHERE name=?",
-        (session["user"],)
-    )
-
-    user = cursor.fetchone()
-
-    if not user:
-        conn.close()
-        return redirect(url_for("home"))
-
-    cursor.execute("""
-        SELECT products.*
-        FROM wishlist
-        JOIN products
-        ON wishlist.product_id = products.id
-        WHERE wishlist.user_email=?
-    """, (user["email"],))
-
-    products = cursor.fetchall()
-
-    conn.close()
-
-    return render_template(
-        "wishlist.html",
-        products=products,
-        user=session.get("user"),
-        cart_count=sum(session.get("cart", {}).values())
-    )
-
-
-# ==========================
-# Product Details
-# ==========================
-@app.route("/product/<int:product_id>")
-def product_details(product_id):
-
-    conn = get_connection()
-    cursor = conn.cursor()
-
-    cursor.execute(
-        "SELECT * FROM products WHERE id=?",
-        (product_id,)
-    )
-
-    product = cursor.fetchone()
-
-    conn.close()
-
-    if not product:
-        return "Product Not Found"
-
-    return render_template(
-        "product.html",
-        product=product,
-        user=session.get("user"),
-        cart_count=sum(session.get("cart", {}).values())
-    )
-
-
-# ==========================
 # Checkout
 # ==========================
 @app.route("/checkout", methods=["POST"])
@@ -331,12 +328,24 @@ def checkout():
     session["cart"] = {}
 
     return """
-    <h2>✅ Order Placed Successfully!</h2>
-    <br>
-    <a href="/">⬅ Back Home</a>
+    <h2 style="text-align:center;margin-top:50px;">
+        ✅ Order Placed Successfully!
+    </h2>
+
+    <div style="text-align:center;margin-top:20px;">
+        <a href="/" style="
+            padding:10px 20px;
+            background:#0d6efd;
+            color:white;
+            text-decoration:none;
+            border-radius:5px;">
+            Continue Shopping
+        </a>
+    </div>
     """
 
-    # ==========================
+
+# ==========================
 # Signup
 # ==========================
 @app.route("/signup", methods=["GET", "POST"])
@@ -352,9 +361,8 @@ def signup():
         cursor = conn.cursor()
 
         try:
-
             cursor.execute(
-                "INSERT INTO users(name, email, password) VALUES (?, ?, ?)",
+                "INSERT INTO users(name,email,password) VALUES(?,?,?)",
                 (name, email, password)
             )
 
@@ -418,8 +426,7 @@ def logout():
 
 
 # ==========================
-# Run Application
+# Run App
 # ==========================
 if __name__ == "__main__":
-
     app.run(debug=True)
