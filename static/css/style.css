@@ -1,0 +1,27 @@
+body{
+background:#f5f5f5;
+}
+
+.card{
+border:none;
+border-radius:15px;
+transition:.3s;
+}
+
+.card:hover{
+transform:translateY(-8px);
+}
+
+.card img{
+height:220px;
+object-fit:cover;
+}
+
+.btn-primary{
+width:100%;
+}
+
+.navbar-brand{
+font-size:28px;
+font-weight:bold;
+}
