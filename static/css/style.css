@@ -295,3 +295,69 @@ footer a:hover{
     border-radius:50px;
 
 }
+
+/* ==========================
+   Customer Reviews
+========================== */
+
+.review-card{
+
+    background:white;
+
+    border-radius:20px;
+
+    padding:30px;
+
+    text-align:center;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.1);
+
+    transition:.4s;
+
+}
+
+.review-card:hover{
+
+    transform:translateY(-10px);
+
+}
+
+.review-img{
+
+    width:80px;
+
+    height:80px;
+
+    margin:auto;
+
+    border-radius:50%;
+
+    background:#0d6efd;
+
+    color:white;
+
+    font-size:40px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    margin-bottom:20px;
+
+}
+
+.review-card h4{
+
+    font-weight:bold;
+
+}
+
+.stars{
+
+    font-size:24px;
+
+    margin:15px 0;
+
+}
