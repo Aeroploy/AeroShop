@@ -92,19 +92,20 @@ def home():
 @app.route("/add/<int:product_id>")
 def add_to_cart(product_id):
 
+    qty = int(request.args.get("qty", 1))
+
     cart = session.get("cart", {})
 
     pid = str(product_id)
 
     if pid in cart:
-        cart[pid] += 1
+        cart[pid] += qty
     else:
-        cart[pid] = 1
+        cart[pid] = qty
 
     session["cart"] = cart
 
     return redirect(request.referrer or url_for("home"))
-
 
 # ==========================
 # Increase Quantity
@@ -174,7 +175,6 @@ def clear_cart():
 
     return redirect(url_for("home"))
 
-
 # ==========================
 # Product Details
 # ==========================
@@ -210,6 +210,51 @@ def product_details(product_id):
         cart_count=sum(session.get("cart", {}).values())
     )
 
+# ==========================
+# Shopping Cart Page
+# ==========================
+@app.route("/cart")
+def cart():
+
+    cart = session.get("cart", {})
+
+    cart_items = []
+    total_price = 0
+    cart_count = 0
+
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    for pid, qty in cart.items():
+
+        cursor.execute(
+            "SELECT * FROM products WHERE id=?",
+            (int(pid),)
+        )
+
+        product = cursor.fetchone()
+
+        if product:
+
+            item = dict(product)
+
+            item["qty"] = qty
+
+            cart_items.append(item)
+
+            total_price += product["price"] * qty
+
+            cart_count += qty
+
+    conn.close()
+
+    return render_template(
+        "cart.html",
+        cart_items=cart_items,
+        total_price=total_price,
+        cart_count=cart_count,
+        user=session.get("user")
+    )
 
 # ==========================
 # Wishlist Page
