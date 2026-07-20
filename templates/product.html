@@ -71,13 +71,43 @@
     <div class="row">
 
         <!-- Product Image -->
-        <div class="col-lg-6" data-aos="fade-left">
 
-            <img src="{{ url_for('static', filename='images/' + product['image']) }}"
-                 class="img-fluid rounded shadow"
-                 style="height:450px; width:100%; object-fit:cover;">
+<div class="col-md-6">
 
-        </div>
+    <!-- Main Image -->
+
+    <img
+        id="mainImage"
+        src="{{ url_for('static', filename='images/' + product['image']) }}"
+        class="img-fluid rounded shadow product-main-image">
+
+    <!-- Thumbnail Images -->
+
+    <div class="d-flex justify-content-center gap-3 mt-4">
+
+        <img
+            src="{{ url_for('static', filename='images/' + product['image']) }}"
+            class="product-thumb active-thumb"
+            onclick="changeImage(this)">
+
+        <img
+            src="{{ url_for('static', filename='images/' + product['image']) }}"
+            class="product-thumb"
+            onclick="changeImage(this)">
+
+        <img
+            src="{{ url_for('static', filename='images/' + product['image']) }}"
+            class="product-thumb"
+            onclick="changeImage(this)">
+
+        <img
+            src="{{ url_for('static', filename='images/' + product['image']) }}"
+            class="product-thumb"
+            onclick="changeImage(this)">
+
+    </div>
+
+</div>
 
         <!-- Product Details -->
         <div class="col-md-6">
@@ -131,16 +161,12 @@
 </div>
 
 <p class="lead text-muted">
-
     {{ product['description'] }}
-
 </p>
 
 <hr>
 
 <div class="mb-4">
-
-    <div class="mb-4">
 
     <h5 class="fw-bold mb-3">
         ✅ Product Highlights
@@ -176,8 +202,6 @@
 
 </div>
 
-<!-- Delivery Information -->
-
 <div class="delivery-card mt-4 mb-4">
 
     <h5 class="fw-bold mb-3">
@@ -202,9 +226,7 @@
 
 </div>
 
-            </p>
-
-            <hr>
+<hr>
 
             <!-- Buttons -->
             <div class="d-grid gap-3">
@@ -340,6 +362,37 @@
     </div>
 
 </div>
+
+<!-- ==========================
+     JavaScript
+========================== -->
+
+<script>
+
+/* ==========================
+   Product Image Gallery
+========================== */
+
+function changeImage(image){
+
+    // Main Image Change
+    document.getElementById("mainImage").src = image.src;
+
+    // Remove Active Class
+    let thumbs = document.querySelectorAll(".product-thumb");
+
+    thumbs.forEach(function(item){
+
+        item.classList.remove("active-thumb");
+
+    });
+
+    // Active Thumbnail
+    image.classList.add("active-thumb");
+
+}
+
+</script>
 
 </body>
 
