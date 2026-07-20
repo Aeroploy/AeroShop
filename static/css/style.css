@@ -593,3 +593,43 @@ footer a:hover{
     color:#666;
 
 }
+
+/* ==========================
+   FAQ Section
+========================== */
+
+.accordion-item{
+
+    border:none;
+
+    border-radius:15px;
+
+    overflow:hidden;
+
+    margin-bottom:18px;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+}
+
+.accordion-button{
+
+    font-weight:700;
+
+    padding:20px;
+
+}
+
+.accordion-button:not(.collapsed){
+
+    background:#0d6efd;
+
+    color:white;
+
+}
+
+.accordion-button:focus{
+
+    box-shadow:none;
+
+}
