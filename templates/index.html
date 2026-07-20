@@ -533,6 +533,10 @@
      Newsletter Section
 ========================== -->
 
+<!-- ==========================
+     Newsletter Section
+========================== -->
+
 <div class="container mt-5 mb-5">
 
     <div class="newsletter-section">
@@ -567,6 +571,54 @@
             </div>
 
         </form>
+
+    </div>
+
+</div>
+
+<!-- ==========================
+     Flash Sale Section
+========================== -->
+
+<div class="container mt-5 mb-5">
+
+    <div class="flash-sale">
+
+        <div class="row align-items-center">
+
+            <div class="col-lg-8">
+
+                <span class="badge bg-warning text-dark fs-6 mb-3">
+                    🔥 Limited Time Offer
+                </span>
+
+                <h2 class="fw-bold text-white">
+                    Flash Sale - Up To 70% OFF
+                </h2>
+
+                <p class="text-light fs-5">
+                    Hurry up! Grab the best deals before the offer ends.
+                </p>
+
+            </div>
+
+            <div class="col-lg-4 text-center">
+
+                <div class="countdown-box">
+
+                    <h3 id="countdown" class="text-warning fw-bold">
+                        24:00:00
+                    </h3>
+
+                    <a href="#products" class="btn btn-warning btn-lg mt-3">
+                        🛒 Shop Now
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
 
     </div>
 
@@ -786,23 +838,19 @@
         <div class="row">
 
             <!-- About -->
-
             <div class="col-md-4">
 
                 <h3>🛒 AeroShop</h3>
 
                 <p class="text-light">
-
                     AeroShop is your trusted online shopping destination.
                     We provide quality products at affordable prices with
                     fast delivery and secure payments.
-
                 </p>
 
             </div>
 
             <!-- Quick Links -->
-
             <div class="col-md-4">
 
                 <h4>Quick Links</h4>
@@ -822,7 +870,6 @@
             </div>
 
             <!-- Contact -->
-
             <div class="col-md-4">
 
                 <h4>Contact Us</h4>
@@ -842,9 +889,7 @@
         <div class="text-center">
 
             <h5>
-
                 © 2026 AeroShop | All Rights Reserved
-
             </h5>
 
         </div>
@@ -852,6 +897,54 @@
     </div>
 
 </footer>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Flash Sale Countdown -->
+
+<script>
+
+let hours = 23;
+let minutes = 59;
+let seconds = 59;
+
+setInterval(function(){
+
+    if(seconds > 0){
+
+        seconds--;
+
+    }else{
+
+        seconds = 59;
+
+        if(minutes > 0){
+
+            minutes--;
+
+        }else{
+
+            minutes = 59;
+
+            if(hours > 0){
+
+                hours--;
+
+            }
+
+        }
+
+    }
+
+    document.getElementById("countdown").innerHTML =
+        String(hours).padStart(2,"0") + ":" +
+        String(minutes).padStart(2,"0") + ":" +
+        String(seconds).padStart(2,"0");
+
+},1000);
+
+</script>
 
 </body>
 
