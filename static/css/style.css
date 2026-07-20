@@ -361,3 +361,53 @@ footer a:hover{
     margin:15px 0;
 
 }
+
+/* ==========================
+   Newsletter Section
+========================== */
+
+.newsletter-section{
+
+    background:linear-gradient(135deg,#0d6efd,#6610f2);
+
+    color:white;
+
+    padding:70px 30px;
+
+    border-radius:25px;
+
+    text-align:center;
+
+    box-shadow:0 12px 35px rgba(0,0,0,.20);
+
+}
+
+.newsletter-section h2{
+
+    font-size:42px;
+
+    font-weight:bold;
+
+}
+
+.newsletter-section p{
+
+    font-size:20px;
+
+}
+
+.newsletter-section input{
+
+    border:none;
+
+    padding:15px;
+
+}
+
+.newsletter-section button{
+
+    padding:15px 30px;
+
+    font-size:18px;
+
+}
