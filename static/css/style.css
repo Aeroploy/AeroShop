@@ -633,3 +633,35 @@ footer a:hover{
     box-shadow:none;
 
 }
+
+/* ==========================
+   Contact Section
+========================== */
+
+.form-control{
+
+    border-radius:12px;
+
+    padding:12px;
+
+}
+
+.form-control:focus{
+
+    box-shadow:none;
+
+    border-color:#0d6efd;
+
+}
+
+.card{
+
+    border-radius:18px;
+
+}
+
+iframe{
+
+    border-radius:18px;
+
+}
