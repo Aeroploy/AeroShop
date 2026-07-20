@@ -11,6 +11,9 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
+    <!-- AOS Animation CSS -->
+    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 
 </head>
@@ -94,7 +97,7 @@
      Hero Carousel
 ========================== -->
 
-<div class="container mt-4">
+<div class="container mt-4" data-aos="fade-up">
 
     <div id="heroCarousel" class="carousel slide carousel-fade shadow rounded"
          data-bs-ride="carousel">
@@ -177,7 +180,7 @@
      Category Buttons
 ========================== -->
 
-<div class="container mt-4">
+<div class="container mt-4" data-aos="fade-up">
 
     <div class="d-flex justify-content-center flex-wrap gap-2">
 
@@ -364,7 +367,7 @@
      Statistics Section
 ========================== -->
 
-<div class="container mt-5 mb-5">
+<div class="container mt-5 mb-5" data-aos="zoom-in">
 
     <div class="row text-center">
 
@@ -440,7 +443,7 @@
      Customer Reviews
 ========================== -->
 
-<div class="container mt-5 mb-5">
+<div class="container mt-5 mb-5" data-aos="fade-up">
 
     <div class="text-center mb-5">
 
@@ -533,7 +536,7 @@
      Newsletter Section
 ========================== -->
 
-<div class="container mt-5 mb-5">
+<div class="container mt-5 mb-5" data-aos="zoom-in">
 
     <div class="newsletter-section">
 
@@ -576,7 +579,7 @@
      Flash Sale Section
 ========================== -->
 
-<div class="container mt-5 mb-5">
+<div class="container mt-5 mb-5" data-aos="fade-right">
 
     <div class="flash-sale">
 
@@ -624,7 +627,7 @@
      Trusted Brands
 ========================== -->
 
-<div class="container mt-5 mb-5">
+<div class="container mt-5 mb-5" data-aos="zoom-in">
 
     <div class="text-center mb-5">
 
@@ -702,7 +705,7 @@
      Why Choose AeroShop
 ========================== -->
 
-<div class="container mt-5 mb-5">
+<div class="container mt-5 mb-5" data-aos="fade-up">
 
     <div class="text-center mb-5">
 
@@ -798,7 +801,7 @@
      Our Services
 ========================== -->
 
-<div class="container mt-5 mb-5">
+<div class="container mt-5 mb-5" data-aos="fade-left">
 
     <div class="text-center mb-5">
 
@@ -930,7 +933,7 @@
      FAQ Section
 ========================== -->
 
-<div class="container mt-5 mb-5">
+<div class="container mt-5 mb-5" data-aos="zoom-in">
 
     <div class="text-center mb-5">
 
@@ -1099,7 +1102,7 @@
      Contact Us Section
 ========================== -->
 
-<div class="container mt-5 mb-5">
+<div class="container mt-5 mb-5" data-aos="fade-up">
 
     <div class="text-center mb-5">
 
@@ -1239,7 +1242,7 @@
      Products Start
 ========================== -->
 
-<div class="container mt-5" id="products">
+<div class="container mt-5" id="products" data-aos="fade-up">
 
     <div class="row">
 
@@ -1512,48 +1515,118 @@
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-<!-- Flash Sale Countdown -->
+<!-- ==========================
+     Back To Top Button
+========================== -->
+
+<button id="topBtn" onclick="topFunction()" title="Go to Top">
+    ⬆
+</button>
+
+<!-- Bootstrap JS -->
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- AOS Animation JS -->
+
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
 
 <script>
 
-let hours = 23;
-let minutes = 59;
-let seconds = 59;
+document.addEventListener("DOMContentLoaded", function(){
 
-setInterval(function(){
+    /* ==========================
+       AOS Animation
+    ========================== */
 
-    if(seconds > 0){
+    AOS.init({
 
-        seconds--;
+        duration:1000,
+        once:true
 
-    }else{
+    });
 
-        seconds = 59;
+    /* ==========================
+       Back To Top Button
+    ========================== */
 
-        if(minutes > 0){
+    const topBtn = document.getElementById("topBtn");
 
-            minutes--;
+    window.addEventListener("scroll", function(){
+
+        if(document.documentElement.scrollTop > 300){
+
+            topBtn.style.display = "block";
 
         }else{
 
-            minutes = 59;
-
-            if(hours > 0){
-
-                hours--;
-
-            }
+            topBtn.style.display = "none";
 
         }
 
+    });
+
+    window.topFunction = function(){
+
+        window.scrollTo({
+
+            top:0,
+            behavior:"smooth"
+
+        });
+
+    };
+
+    /* ==========================
+       Flash Sale Countdown
+    ========================== */
+
+    const countdown = document.getElementById("countdown");
+
+    if(countdown){
+
+        let hours = 23;
+        let minutes = 59;
+        let seconds = 59;
+
+        setInterval(function(){
+
+            if(seconds > 0){
+
+                seconds--;
+
+            }else{
+
+                seconds = 59;
+
+                if(minutes > 0){
+
+                    minutes--;
+
+                }else{
+
+                    minutes = 59;
+
+                    if(hours > 0){
+
+                        hours--;
+
+                    }
+
+                }
+
+            }
+
+            countdown.innerHTML =
+                String(hours).padStart(2,"0") + ":" +
+                String(minutes).padStart(2,"0") + ":" +
+                String(seconds).padStart(2,"0");
+
+        },1000);
+
     }
 
-    document.getElementById("countdown").innerHTML =
-        String(hours).padStart(2,"0") + ":" +
-        String(minutes).padStart(2,"0") + ":" +
-        String(seconds).padStart(2,"0");
-
-},1000);
+});
 
 </script>
 
