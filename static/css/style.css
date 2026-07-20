@@ -665,3 +665,73 @@ iframe{
     border-radius:18px;
 
 }
+
+/* ==========================
+   Back To Top Button
+========================== */
+
+html{
+
+    scroll-behavior:smooth;
+
+}
+
+#topBtn{
+
+    display:none;
+
+    position:fixed;
+
+    bottom:30px;
+
+    right:30px;
+
+    z-index:999;
+
+    border:none;
+
+    outline:none;
+
+    background:#0d6efd;
+
+    color:white;
+
+    cursor:pointer;
+
+    width:55px;
+
+    height:55px;
+
+    border-radius:50%;
+
+    font-size:22px;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.3);
+
+    transition:.3s;
+
+}
+
+#topBtn:hover{
+
+    transform:translateY(-5px);
+
+    background:#0b5ed7;
+
+}
+
+/* ==========================
+   Smooth Card Hover
+========================== */
+
+.card{
+
+    transition:.35s;
+
+}
+
+.card:hover{
+
+    transform:translateY(-10px);
+
+}
