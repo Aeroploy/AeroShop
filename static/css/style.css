@@ -489,3 +489,55 @@ footer a:hover{
     margin-top:15px;
 
 }
+
+/* ==========================
+   Why Choose AeroShop
+========================== */
+
+.feature-card{
+
+    background:#fff;
+
+    padding:35px;
+
+    text-align:center;
+
+    border-radius:20px;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.12);
+
+    transition:.4s;
+
+    height:100%;
+
+}
+
+.feature-card:hover{
+
+    transform:translateY(-10px);
+
+    box-shadow:0 20px 40px rgba(13,110,253,.25);
+
+}
+
+.feature-icon{
+
+    font-size:55px;
+
+    margin-bottom:20px;
+
+}
+
+.feature-card h4{
+
+    font-weight:bold;
+
+    margin-bottom:15px;
+
+}
+
+.feature-card p{
+
+    color:#666;
+
+}
