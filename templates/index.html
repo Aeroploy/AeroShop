@@ -21,7 +21,7 @@
      Navbar
 ========================== -->
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow sticky-top">
 
     <div class="container">
 
@@ -270,12 +270,24 @@
 
                 <div class="col-lg-4 col-md-6 mb-4">
 
-            <div class="card shadow h-100">
+            <div class="card shadow-lg border-0 rounded-4 h-100 product-card">
 
-                <img src="{{ url_for('static', filename='images/' + product['image']) }}"
-                     class="card-img-top"
-                     alt="{{ product['name'] }}"
-                     style="height:250px; object-fit:cover;">
+                <div class="position-relative">
+
+    <img src="{{ url_for('static', filename='images/' + product['image']) }}"
+         class="card-img-top"
+         alt="{{ product['name'] }}"
+         style="height:260px; object-fit:cover;">
+
+    <span class="badge bg-danger position-absolute top-0 start-0 m-3">
+        🔥 20% OFF
+    </span>
+
+    <span class="badge bg-success position-absolute top-0 end-0 m-3">
+        In Stock
+    </span>
+
+</div>
 
                 <div class="card-body text-center">
 
