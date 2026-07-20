@@ -541,3 +541,55 @@ footer a:hover{
     color:#666;
 
 }
+
+/* ==========================
+   Our Services
+========================== */
+
+.service-card{
+
+    background:#fff;
+
+    border-radius:20px;
+
+    padding:35px;
+
+    text-align:center;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.12);
+
+    transition:.4s;
+
+    height:100%;
+
+}
+
+.service-card:hover{
+
+    transform:translateY(-10px);
+
+    box-shadow:0 20px 40px rgba(13,110,253,.25);
+
+}
+
+.service-icon{
+
+    font-size:55px;
+
+    margin-bottom:20px;
+
+}
+
+.service-card h4{
+
+    font-weight:bold;
+
+    margin-bottom:15px;
+
+}
+
+.service-card p{
+
+    color:#666;
+
+}
