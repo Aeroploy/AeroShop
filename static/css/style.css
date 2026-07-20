@@ -411,3 +411,81 @@ footer a:hover{
     font-size:18px;
 
 }
+
+/* ==========================
+   Flash Sale Section
+========================== */
+
+.flash-sale{
+
+    background:linear-gradient(135deg,#dc3545,#fd7e14);
+
+    border-radius:25px;
+
+    padding:60px;
+
+    box-shadow:0 15px 35px rgba(0,0,0,.25);
+
+}
+
+.countdown-box{
+
+    background:white;
+
+    border-radius:20px;
+
+    padding:25px;
+
+}
+
+#countdown{
+
+    font-size:42px;
+
+    margin:0;
+
+}
+
+.flash-sale h2{
+
+    font-size:42px;
+
+}
+
+/* ==========================
+   Trusted Brands
+========================== */
+
+.brand-card{
+
+    background:white;
+
+    padding:35px;
+
+    border-radius:20px;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.12);
+
+    transition:.4s;
+
+    cursor:pointer;
+
+    font-size:50px;
+
+}
+
+.brand-card:hover{
+
+    transform:translateY(-10px);
+
+    box-shadow:0 20px 40px rgba(13,110,253,.25);
+
+}
+
+.brand-card h5{
+
+    font-weight:bold;
+
+    margin-top:15px;
+
+}
