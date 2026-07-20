@@ -71,7 +71,7 @@
     <div class="row">
 
         <!-- Product Image -->
-        <div class="col-md-6">
+        <div class="col-lg-6" data-aos="fade-left">
 
             <img src="{{ url_for('static', filename='images/' + product['image']) }}"
                  class="img-fluid rounded shadow"
@@ -82,57 +82,161 @@
         <!-- Product Details -->
         <div class="col-md-6">
 
-            <span class="badge bg-secondary mb-2">
+            <span class="badge bg-primary fs-6 mb-3">
+    {{ product['category'] }}
+</span>
 
-                {{ product['category'] }}
+<h1 class="fw-bold display-5">
+    {{ product['name'] }}
+</h1>
 
-            </span>
+<div class="mb-3">
 
-            <h2 class="fw-bold">
+    <span class="text-warning fs-4">
+        ⭐⭐⭐⭐⭐
+    </span>
 
-                {{ product['name'] }}
+    <span class="text-muted fs-5">
+        {{ product['rating'] }}/5
+    </span>
 
-            </h2>
+</div>
 
-            <h3 class="text-success my-3">
+<div class="price-box mb-4">
 
-                ₹{{ product['price'] }}
+    <h2 class="text-success fw-bold mb-1">
 
-            </h3>
+        ₹{{ product['price'] }}
 
-            <p class="text-muted">
+    </h2>
 
-                {{ product['description'] }}
+    <h5 class="text-muted">
+
+        <del>₹{{ product['price'] + 1000 }}</del>
+
+        <span class="badge bg-danger ms-2">
+
+            30% OFF
+
+        </span>
+
+    </h5>
+
+    <p class="text-success fw-bold mt-2">
+
+        🎉 You Save ₹1000
+
+    </p>
+
+</div>
+
+<p class="lead text-muted">
+
+    {{ product['description'] }}
+
+</p>
+
+<hr>
+
+<div class="mb-4">
+
+    <div class="mb-4">
+
+    <h5 class="fw-bold mb-3">
+        ✅ Product Highlights
+    </h5>
+
+    <div class="delivery-card">
+
+        <ul class="list-group list-group-flush">
+
+            <li class="list-group-item">
+                📦 <strong>Stock:</strong> In Stock
+            </li>
+
+            <li class="list-group-item">
+                🚚 <strong>Delivery:</strong> Free Delivery Available
+            </li>
+
+            <li class="list-group-item">
+                🔒 <strong>Payment:</strong> 100% Secure Payment
+            </li>
+
+            <li class="list-group-item">
+                🔄 <strong>Return:</strong> 7 Days Easy Return
+            </li>
+
+            <li class="list-group-item">
+                🏆 <strong>Quality:</strong> Premium Quality Assured
+            </li>
+
+        </ul>
+
+    </div>
+
+</div>
+
+<!-- Delivery Information -->
+
+<div class="delivery-card mt-4 mb-4">
+
+    <h5 class="fw-bold mb-3">
+        🚚 Delivery Information
+    </h5>
+
+    <p class="mb-2">
+        📦 Free Delivery Across India
+    </p>
+
+    <p class="mb-2">
+        ⏰ Delivery in 3 - 5 Business Days
+    </p>
+
+    <p class="mb-2">
+        🔒 100% Secure Online Payment
+    </p>
+
+    <p class="mb-0">
+        🔄 Easy Return Available
+    </p>
+
+</div>
 
             </p>
 
             <hr>
 
             <!-- Buttons -->
-            <div class="d-grid gap-2">
+            <div class="d-grid gap-3">
 
-                <a href="{{ url_for('add_wishlist', product_id=product['id']) }}"
-                   class="btn btn-outline-danger btn-lg">
+    <a href="{{ url_for('add_to_cart', product_id=product['id']) }}"
+       class="btn btn-primary btn-lg">
 
-                    ❤️ Add To Wishlist
+        🛒 Add To Cart
 
-                </a>
+    </a>
 
-                <a href="{{ url_for('add_to_cart', product_id=product['id']) }}"
-                   class="btn btn-primary btn-lg">
+    <a href="{{ url_for('add_wishlist', product_id=product['id']) }}"
+       class="btn btn-outline-danger btn-lg">
 
-                    🛒 Add To Cart
+        ❤️ Add To Wishlist
 
-                </a>
+    </a>
 
-                <a href="/"
-                   class="btn btn-outline-dark btn-lg">
+    <button class="btn btn-success btn-lg">
 
-                    ⬅ Back
+        ⚡ Buy Now
 
-                </a>
+    </button>
 
-            </div>
+    <a href="/"
+       class="btn btn-outline-dark">
+
+        ⬅ Continue Shopping
+
+    </a>
+
+</div>
 
         </div>
 
