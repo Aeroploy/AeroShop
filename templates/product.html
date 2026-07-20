@@ -244,6 +244,103 @@
 
 </div>
 
+<!-- ==========================
+     Related Products
+========================== -->
+
+<div class="container mt-5 mb-5">
+
+    <div class="text-center mb-5">
+
+        <h2 class="fw-bold">
+            🛍️ You May Also Like
+        </h2>
+
+        <p class="text-muted">
+            Explore more premium products from AeroShop.
+        </p>
+
+    </div>
+
+    <div class="row">
+
+        {% for item in products %}
+
+        {% if item['id'] != product['id'] %}
+
+        <div class="col-lg-4 col-md-6 mb-4">
+
+            <div class="card related-card border-0 shadow h-100">
+
+                <img src="{{ url_for('static', filename='images/' + item['image']) }}"
+                     class="card-img-top"
+                     style="height:250px; object-fit:cover;">
+
+                <div class="card-body text-center">
+
+                    <span class="badge bg-secondary mb-2">
+
+                        {{ item['category'] }}
+
+                    </span>
+
+                    <h4 class="fw-bold">
+
+                        {{ item['name'] }}
+
+                    </h4>
+
+                    <h5 class="text-success">
+
+                        ₹{{ item['price'] }}
+
+                    </h5>
+
+                    <div class="text-warning mb-3">
+
+                        ⭐⭐⭐⭐⭐
+
+                    </div>
+
+                    <div class="d-grid gap-2">
+
+                        <a href="{{ url_for('product_details', product_id=item['id']) }}"
+                           class="btn btn-dark">
+
+                            👁 View Details
+
+                        </a>
+
+                        <a href="{{ url_for('add_to_cart', product_id=item['id']) }}"
+                           class="btn btn-primary">
+
+                            🛒 Add To Cart
+
+                        </a>
+
+                        <a href="{{ url_for('add_wishlist', product_id=item['id']) }}"
+                           class="btn btn-outline-danger">
+
+                            ❤️ Wishlist
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        {% endif %}
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
 </body>
 
 </html>

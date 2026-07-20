@@ -184,6 +184,7 @@ def product_details(product_id):
     conn = get_connection()
     cursor = conn.cursor()
 
+    # Current Product
     cursor.execute(
         "SELECT * FROM products WHERE id=?",
         (product_id,)
@@ -191,14 +192,20 @@ def product_details(product_id):
 
     product = cursor.fetchone()
 
-    conn.close()
-
     if product is None:
+        conn.close()
         return "Product Not Found!"
+
+    # All Products (Related Products માટે)
+    cursor.execute("SELECT * FROM products")
+    products = cursor.fetchall()
+
+    conn.close()
 
     return render_template(
         "product.html",
         product=product,
+        products=products,
         user=session.get("user"),
         cart_count=sum(session.get("cart", {}).values())
     )

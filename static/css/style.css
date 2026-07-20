@@ -981,3 +981,75 @@ html{
     transform:translateY(-5px);
 
 }
+
+/* ==========================
+   Related Products
+========================== */
+
+.related-card{
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+    transition:.4s;
+
+    background:#fff;
+
+}
+
+.related-card:hover{
+
+    transform:translateY(-10px);
+
+    box-shadow:0 20px 40px rgba(0,0,0,.15);
+
+}
+
+.related-card img{
+
+    height:250px;
+
+    object-fit:cover;
+
+    transition:.4s;
+
+}
+
+.related-card:hover img{
+
+    transform:scale(1.08);
+
+}
+
+.related-card .card-body{
+
+    padding:25px;
+
+}
+
+.related-card h4{
+
+    font-weight:700;
+
+    margin-top:10px;
+
+}
+
+.related-card h5{
+
+    color:#198754;
+
+    font-weight:bold;
+
+    margin:15px 0;
+
+}
+
+.related-card .btn{
+
+    border-radius:10px;
+
+    font-weight:600;
+
+}
