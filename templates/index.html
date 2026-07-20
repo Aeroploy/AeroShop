@@ -20,6 +20,28 @@
 
 <body class="bg-light">
 
+    <!-- ==========================
+     Professional Preloader
+========================== -->
+
+<div id="preloader">
+
+    <div class="loader-content">
+
+        <div class="loader-logo">
+            🛒
+        </div>
+
+        <h2 class="loader-text">
+            AeroShop
+        </h2>
+
+        <div class="loader-spinner"></div>
+
+    </div>
+
+</div>
+
 <!-- ==========================
      Navbar
 ========================== -->
@@ -1534,6 +1556,22 @@
 <script>
 
 document.addEventListener("DOMContentLoaded", function(){
+
+    /* ==========================
+   Professional Preloader
+========================== */
+
+const preloader = document.getElementById("preloader");
+
+window.addEventListener("load", function(){
+
+    setTimeout(function(){
+
+        preloader.classList.add("preloader-hide");
+
+    }, 800);
+
+});
 
     /* ==========================
        AOS Animation
