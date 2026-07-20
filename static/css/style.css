@@ -241,3 +241,57 @@ footer a:hover{
     font-size:50px;
 
 }
+
+/* ==========================
+   Offer Banner
+========================== */
+
+.offer-banner{
+
+    background:linear-gradient(135deg,#ff512f,#dd2476);
+
+    color:white;
+
+    border-radius:20px;
+
+    padding:60px 20px;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.2);
+
+}
+
+.offer-banner h1{
+
+    font-size:50px;
+
+    font-weight:bold;
+
+}
+
+.offer-banner h2{
+
+    font-size:35px;
+
+    margin-top:10px;
+
+}
+
+.offer-banner p{
+
+    font-size:20px;
+
+    margin-top:20px;
+
+}
+
+.offer-banner .btn{
+
+    font-size:22px;
+
+    font-weight:bold;
+
+    padding:12px 35px;
+
+    border-radius:50px;
+
+}
